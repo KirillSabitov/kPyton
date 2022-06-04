@@ -1,6 +1,6 @@
-from ast import Index
 import random
-HANGMAN = ['''
+def sozdanieV():
+    HANGMAN = ['''
  +---+
      |
      |
@@ -37,7 +37,7 @@ HANGMAN = ['''
 / \  |
     ===''','''
  +---+
- 0   |
+[0   |
 /|\  |
 / \  |
     ===''','''
@@ -56,14 +56,19 @@ HANGMAN = ['''
 [/|\] |
  / \  |
      ===''']
+    return HANGMAN 
 #создаем список,
-world=['антилопа', 'барсук', 'медведь', 'бизон', 'кабан', 'мышь', 'бык', 'кот', 'шимпанзе', 'бурундук','крокодил', 'корова', 'олень', 'собака', 'осел', 'утка', 'слон', 'хорек', 'лиса', 'лягушка', 'жираф', 'коза', 'заяц', 'хомяк', 'еж', 'бегемот', 'конь', 'обезьяна', 'свинья','кролик', 'змея', 'белка', 'тигр', 'волк', 'зебра', 'ворона', 'курица', 'орел', 'гусь', 'носорог', 'баран', 'рысь', 'ласточка', 'крот']
+world={'животные':'антилопа барсук медведь бизон кабан мышь бык кот шимпанзе бурундук крокодил корова олень собака осел утка слон хорек лиса лягушка жираф коза заяц хомяк еж бегемот конь обезьяна свинья кролик змея белка тигр волк зебра ворона курица орел гусь носорог баран рысь ласточка крот'.split(),
+'фигуры':'шар конус параллелепипед цилиндр пирамида сфера квадрат трапеция параллелограмм ромб треугольник прямоугольник'.split(),
+'цвета':'красный оранженвый желтый зеленый голубой синий фиолетовый розовый белый черный серый бежевый коричневый бирюзовый салатовый'.split()}
 def getRandomWord(worldlist):
-    worldIndex = random.randint(0,len(worldlist)-1)
-    return worldlist[worldIndex]
+    wordKey = random.choice(list(worldlist.keys()))
+
+    worldIndex = random.randint(0,len(worldlist[wordKey])-1)
+    return [worldlist[wordKey][worldIndex],wordKey]
 
 def funk(errorB,yesB,sicretS):
-    print(HANGMAN[len(errorB)])
+    print(hm[len(errorB)])
     print()
 
     print('Ошибочные буквы',end=' ')
@@ -99,7 +104,7 @@ def playAgen():
     while True:
         otvet = input().lower()
         if  (otvet =='да') or (otvet =='д') or (otvet =='yes') or (otvet =='y'):
-            return True
+            return slozhnost()
 
         elif (otvet =='нет') or (otvet =='н') or (otvet =='no') or (otvet =='n'):
             return False
@@ -123,22 +128,35 @@ def slozhnost():
         else:
             return slOtv
 
-bs = slozhnost()
-if bs == "с":
-    del HANGMAN[10]
-    del HANGMAN[9]
-if bs == "т":
-    del HANGMAN[10]
-    del HANGMAN[9]
-    del HANGMAN[8]
-    del HANGMAN[7]
+def delVis(vyBs,hangp):
+    if vyBs == "с":
+        del hangp[10]
+        del hangp[9]
+    if vyBs == "т":
+        del hangp[10]
+        del hangp[9]
+        del hangp[8]
+        del hangp[7]
 
+delV = True
 errorB = ''
 yesB = ''
 gameOver = False
-sicretS = getRandomWord(world)
+sicretS,keyW = getRandomWord(world)
+
 
 while True:
+    if delV:
+        hm = sozdanieV()
+
+
+        bs = slozhnost()
+        delVis(bs,hm)
+        delV = False
+    
+    if bs == 'л':
+        print(keyW)
+
     funk(errorB,yesB,sicretS)
 
     bukva = getGuess(errorB+yesB)
@@ -158,7 +176,7 @@ while True:
             gameOver = True
     else:
         errorB = errorB + bukva
-        if len(errorB) == len(HANGMAN) - 1:
+        if len(errorB) == len(hm) - 1:
             funk(errorB,yesB,sicretS)
             print('Вы исчерпали все попытки!\nНеугадано букв:'+str(len(errorB))+', и угадано букв:'+str(len(yesB))+'.Было загадано слово:"'+sicretS+'".')
             gameOver = True
@@ -168,6 +186,7 @@ while True:
             errorB = ''
             yesB = ''
             gameOver = False
-            sicretS = getRandomWord(world)
+            sicretS,keyW = getRandomWord(world)
+            delV = True
         else:
             break
