@@ -18,16 +18,18 @@ def proverka():
         return ['O','X']
 
 
-#def whoGoesFirst():
-  #  if random.randint(0,1)==0:
+def whoGoesFirst():
+    if random.randint(0,1)==0:
+        return 'компьютер'
+    else:
+        return 'человек'
 
 
 def hod(board,pr,move):
     board[move] = pr
 
-board = ['','','','','','','','','']
-#displayboard(board)
-#yach = input('Введите число от одного до девяти')
+
+
 
 
 def proverka2(board,pr):
@@ -77,23 +79,76 @@ def ai(board, movesList):
 board = [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
 ml = [1,3,7,9]
 
+def GKM(board,computerLetter):
+    if computerLetter == 'X':
+        playerLetter = 'O'
+    else:
+        playerLetter = 'X'
 
-hodp = ai(board,ml)
-print(hodp)
-hod(board,'O',hodp)
-displayboard(board)
+    for i in range(1,10):
+        boardCopi = board2(board)
+        if isF(board,i):
+            hod(boardCopi,computerLetter,i)
+            if proverka2(boardCopi,computerLetter):
+                return i
 
-board[1] = 'X'
-board[7] = 'X'
-board[9] = 'X'
+    for i in range(1,10):
+        boardCopi = board2(board)
+        if isF(board,i):
+            hod(boardCopi,playerLetter,i)
+            if proverka2(boardCopi,playerLetter):
+                return i
 
-hodp = ai(board,ml)
-print(hodp)
-hod(board,'O',hodp)
-displayboard(board)
-
-   # print(qwerty([' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']))
-#print(proverka())
+def isbf(board):
+    for i in range(1,10):
+        if isF(board, i):
+            return False
+        return True
 
 
+print('ИГРА "КРЕСТИКИ-НОЛИКИ"')
 
+while True:
+    theboard = [' ']*10
+    playerLetter,computerLetter = proverka()
+
+    turn = whoGoesFirst()
+    print(''+turn+'ходит первым')
+
+    gemeIP = True
+    
+    while gemeIP:
+        if turn == 'человек':
+            displayboard(theboard)
+            move = proverka3(theboard)
+            hod(theboard,playerLetter,move)
+
+            if proverka2(theboard,playerLetter):
+                displayboard(theboard)
+                print('Поздравляю, ты выиграл')
+                gameIP = False
+            else:
+                if isbf(theboard):
+                    displayboard(theboard)
+                    print('Ничья!')
+                    break
+                else:
+                    turn = 'компьютер'
+
+        else:
+            move = GKM(theboard,computerLetter)
+            hod(theboard,computerLetter,move)
+            if proverka2(theboard,computerLetter):
+                displayboard(theboard)
+                print('Вы пршогиграли')
+                gameIP = False
+            else:
+                if isbf(theboard):
+                    displayboard(theboard)
+                    print('Ничья!')
+                    break
+                else:
+                    turn = 'человек'
+    print('Еще раз')
+    if not input().lower().startswith('д'):
+        break
