@@ -29,9 +29,6 @@ def hod(board,pr,move):
     board[move] = pr
 
 
-
-
-
 def proverka2(board,pr):
     return((board[1]==pr and board[2]==pr and board[3]==pr) or 
     (board[4]==pr and board[5]==pr and board[6]==pr) or
@@ -43,15 +40,11 @@ def proverka2(board,pr):
     (board[7]==pr and board[5]==pr and board[3]==pr))
     
 
-
-
-
-
-def board2(x):
-    x = []
+def board2(board):
+    boardCopi = []
     for i in board:
-        x.append(i)
-    return x
+        boardCopi.append(i)
+    return boardCopi
 
 def isF(board, move):
     return board[move] == ' '
@@ -76,9 +69,6 @@ def ai(board, movesList):
         return None
 
 
-board = [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ']
-ml = [1,3,7,9]
-
 def GKM(board,computerLetter):
     if computerLetter == 'X':
         playerLetter = 'O'
@@ -98,12 +88,20 @@ def GKM(board,computerLetter):
             hod(boardCopi,playerLetter,i)
             if proverka2(boardCopi,playerLetter):
                 return i
+    move = ai(board,[1,3,7,9])
+    if move != None:
+        return move
+
+    if isF(board,5):
+        return 5
+
+    return ai(board,[2,4,6,8])
 
 def isbf(board):
     for i in range(1,10):
         if isF(board, i):
             return False
-        return True
+    return True
 
 
 print('ИГРА "КРЕСТИКИ-НОЛИКИ"')
@@ -113,11 +111,11 @@ while True:
     playerLetter,computerLetter = proverka()
 
     turn = whoGoesFirst()
-    print(''+turn+'ходит первым')
+    print(''+turn+' ходит первым')
 
-    gemeIP = True
+    gameIP = True
     
-    while gemeIP:
+    while gameIP:
         if turn == 'человек':
             displayboard(theboard)
             move = proverka3(theboard)
@@ -140,7 +138,7 @@ while True:
             hod(theboard,computerLetter,move)
             if proverka2(theboard,computerLetter):
                 displayboard(theboard)
-                print('Вы пршогиграли')
+                print('Вы проиграли')
                 gameIP = False
             else:
                 if isbf(theboard):
