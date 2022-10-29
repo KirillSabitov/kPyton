@@ -136,6 +136,7 @@ while game:
             game = False
             computer = False
         a = input('Нажмите enter для продолжения')
-playAgen()
+    if not playAgen():
+        break
         
 
