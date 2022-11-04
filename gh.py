@@ -32,15 +32,15 @@ def podskazka(chislogames,chislocom):
     return ' '.join(podskazka)
 
 def provvoda(num):
-    print(num)
+    
     if num == '':
         return False
     
 
    
     for i in num:
-        print(i)
-        if num not in '0 1 2 3 4 5 6 7 8 9'.split():
+        
+        if i not in '0 1 2 3 4 5 6 7 8 9'.split():
 
             return False
     return True
@@ -71,14 +71,24 @@ print('   Холодно               Не отгадана ни одна ци�
 
 
 while True:
-    secretnum = generator_Cisla
+    secretnum = generator_Cisla()
 
     print('У вас есть %s попыток, чтобы отгадать число' %KOL_POP)
     popytka = 1
     while popytka <= KOL_POP:
         chislogames=''
         while len(chislogames) != KOL_CIFR or not provvoda(chislogames):
-            print(len(chislogames)!= KOL_CIFR)
-        chislogames == secretnum
+            print('Попытка № %s:' % (popytka))
+            chislogames = input()
+
+        print(podskazka(chislogames,secretnum))
+
+        popytka += 1
+
+        if chislogames == secretnum:
+            break
+        if popytka > KOL_POP:
+            print('Попыток больше не осталосью я загадал число %s/' % (secretnum))
+
     if not playAgain():
         break

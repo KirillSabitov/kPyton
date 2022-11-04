@@ -72,7 +72,7 @@ def playAgen():
     print('Хотите сыграть еще раз?')
     while True:
         otvet = input().lower()
-        if  (otvet =='да') or (otvet =='д') or (otvet =='yes') or (otvet =='y'):
+        if (otvet =='да') or (otvet =='д') or (otvet =='yes') or (otvet =='y'):
             return True  
 
         elif (otvet =='нет') or (otvet =='н') or (otvet =='no') or (otvet =='n'):
@@ -96,18 +96,19 @@ def display(gamer,board,kubik1,kubik2,balk,balg):
     
 
 
-
-
 pravila()
-ktobrosaet = 'Человек'
-kub = displayboard()
-balk = 0
-balg = 0
+
 game = True
-gamer = True
-computer = True
+
 
 while game:
+    ktobrosaet = 'Человек'
+    kub = displayboard()
+    balk = 0
+    balg = 0
+    gamer = True
+    computer = True
+
     while gamer:
         kubik1,kubik2 = getrandomcislo()
         balg = balg + kubik1 + kubik2
@@ -136,7 +137,5 @@ while game:
             game = False
             computer = False
         a = input('Нажмите enter для продолжения')
-    if not playAgen():
-        break
-        
-
+    
+    game = playAgen()
