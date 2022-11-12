@@ -1,5 +1,3 @@
-from re import T
-
 
 def histori():
     print('Вы приходите на ипподром поставить на лошадь.')

@@ -6,10 +6,10 @@ attNumber = 0
 print('Привет! Как тебя зовут?')
 myName = input()
 
-number = random.randint(1,20)
+number = random.randint(1,100)
 print('Что ж, '+myName+', я загадываю число от 1 до 20.')
 
-for attNumber in range(6):
+for attNumber in range(10):
    # print('Попробуй угадать') # четыре
     guess = input('Попробуй угадать')
     guess = int(guess)
