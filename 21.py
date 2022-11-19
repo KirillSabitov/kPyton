@@ -132,7 +132,7 @@ while game:
             print('Вы проиграли!')
             game = False
             computer = False
-        elif balk == balg:
+        elif balk >17 and balk == balg:
             print('Ничья!')
             game = False
             computer = False

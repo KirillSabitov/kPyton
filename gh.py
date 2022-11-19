@@ -88,7 +88,7 @@ while True:
         if chislogames == secretnum:
             break
         if popytka > KOL_POP:
-            print('Попыток больше не осталосью я загадал число %s/' % (secretnum))
+            print('Попыток больше не осталосью я загадал число %s' % (secretnum))
 
     if not playAgain():
         break
