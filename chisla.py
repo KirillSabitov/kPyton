@@ -7,7 +7,7 @@ print('Привет! Как тебя зовут?')
 myName = input()
 
 number = random.randint(1,100)
-print('Что ж, '+myName+', я загадываю число от 1 до 20.')
+print('Что ж, '+myName+', я загадываю число от 1 до 100.')
 
 for attNumber in range(10):
    # print('Попробуй угадать') # четыре
