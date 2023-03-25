@@ -1,7 +1,7 @@
 from tkinter import *
 
 root = Tk
-
+c =Canvas(root, width = 800, height=600)
 def addFigure():
     fig = Toplevel()
     fig.title('Фигура')
@@ -33,4 +33,7 @@ def addFigure():
         xx = int(x2.get())
         yy = int(y2.get())
         if v.get() == 0:
-            c.create_oval(x,y,xx,yy,width= )
+            c.create_oval(x,y,xx,yy,width=2 )
+        if v.get() == 1:
+            c.create_rectangle(x,y,xx,yy,width=2)
+
